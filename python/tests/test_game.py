@@ -1,6 +1,7 @@
-from tennis_scoring.game import start
+from tennis_scoring.game import (start, Player, Score)
 
 def test_start():
-    (player1, player2) = start()
-    assert player1['score'] == 0
-    assert player2['score'] == 0
+    game = start()
+    assert game[Player.ONE] == Score.LOVE
+    assert game[Player.TWO] == Score.LOVE
+    assert game['winner'] == None
