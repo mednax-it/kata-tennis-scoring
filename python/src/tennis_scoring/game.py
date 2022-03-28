@@ -14,3 +14,8 @@ class Score(Enum):
 
 def start():
     return {Player.ONE: Score.LOVE, Player.TWO: Score.LOVE, 'winner': None}
+
+
+def next_score(score):
+    scores = list(Score)
+    return scores[scores.index(score) + 1]
