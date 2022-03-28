@@ -10,6 +10,7 @@ class Score(Enum):
     FIFTEEN = 15
     THIRTY = 30
     FOURTY = 40
+    WINNER = 100
 
 
 def start():
@@ -17,5 +18,7 @@ def start():
 
 
 def next_score(score):
+    if score == Score.WINNER:
+        return None
     scores = list(Score)
     return scores[scores.index(score) + 1]
