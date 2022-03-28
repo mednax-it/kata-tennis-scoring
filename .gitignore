@@ -6,6 +6,32 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# AutoMake tools
+*.in
+aclocal.m4
+autom4te.cache/
+build-aux/
+configure
+m4/
+*.*~
+
+# Configuration
+Makefile
+config.h
+config.status
+libtool
+*/.deps/
+stamp-h1
+
+# Make
+*/.libs/
+*.la
+*.o
+*.lo
+*.trs
+src/main
+tests/check_tennis_scoring
+
 # C extensions
 *.so
 

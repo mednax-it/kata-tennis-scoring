@@ -6,7 +6,22 @@ Source: [https://github.com/ardalis/kata-catalog](https://github.com/ardalis/kat
 
 ## 💻 Setup
 
-See the READMEs in each language-specific directory for more details on getting up and running.
+The following programs should be installed on your system:
+- Autoconf (2.59)
+- Automake (1.9.6)
+- Libtool (1.5.22)
+- Check (0.9.9)
+
+Somewhat earlier versions of these programs might work.
+
+When working at a clean subdirectory, execute the following commands from a terminal to run the autotools with verbose, install, and force flags. This should determine the installed compiler and libraries needed, and generate make files for the project:
+- autoreconf -vif
+- ./configure
+
+## 💻 Testing
+
+To compile and run the unit-tests, run the following command from a terminal:
+- make check
 
 ## 🏸 Background
 
