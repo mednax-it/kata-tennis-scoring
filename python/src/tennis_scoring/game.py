@@ -16,6 +16,10 @@ class Score(Enum):
 def start():
     return {Player.ONE: Score.LOVE, Player.TWO: Score.LOVE, 'winner': None}
 
+def point(game, player):
+    new_score = next_score(game[player])
+    winner = player if new_score == Score.WINNER else None
+    return {**game, **{player: new_score, 'winner': winner}}
 
 def next_score(score):
     if score == Score.WINNER:

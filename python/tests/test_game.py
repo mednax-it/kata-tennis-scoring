@@ -1,10 +1,25 @@
 import pytest
 
-from tennis_scoring.game import (next_score, start, Player, Score)
+from tennis_scoring.game import (next_score, point, start, Player, Score)
 
 def test_start():
     assert start() == {
         Player.ONE: Score.LOVE, Player.TWO: Score.LOVE, 'winner': None}
+
+
+def test_point_normal():
+    game = start()
+    game = point(game, Player.ONE)
+    assert game[Player.ONE] == Score.FIFTEEN
+    assert game['winner'] == None
+
+
+def test_point_game():
+    game = start()
+    game[Player.ONE] = Score.FOURTY
+    game = point(game, Player.ONE)
+    assert game[Player.ONE] == Score.WINNER
+    assert game['winner'] == Player.ONE
 
 
 def test_next_score():
