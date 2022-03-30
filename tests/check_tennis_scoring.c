@@ -19,10 +19,25 @@ START_TEST(test_framework)
 }
 END_TEST
 
+START_TEST(test_game_initial_state)
+{
+    /* We have two players */
+    ck_assert_ptr_ne(NULL, &PlayerBlue);
+    ck_assert_ptr_ne(NULL, &PlayerRed);
+
+    /* They both have a score of 0 (love) */
+    ck_assert_uint_eq(0, PlayerBlue.score);
+    ck_assert_uint_eq(0, PlayerRed.score);
+
+    /* There is no winner */
+    ck_assert_ptr_eq(NULL, Winner);
+}
+END_TEST
+
 Suite * tennis_scoring_suite(void)
 {
     Suite *s;
-    TCase *tc_core;
+    TCase *tc_core, *tc_tennis;
     TCase *tc_limits;
 
     s = suite_create("TennisScoring");
@@ -33,6 +48,12 @@ Suite * tennis_scoring_suite(void)
     tcase_add_checked_fixture(tc_core, setup, teardown);
     tcase_add_test(tc_core, test_framework);
     suite_add_tcase(s, tc_core);
+
+    /* Tennis test case */
+    tc_tennis = tcase_create("Tennis");
+
+    tcase_add_test(tc_tennis, test_game_initial_state);
+    suite_add_tcase(s, tc_tennis);
 
     return s;
 }
