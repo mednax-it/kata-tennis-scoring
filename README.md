@@ -4,26 +4,32 @@
 
 Source: [https://github.com/ardalis/kata-catalog](https://github.com/ardalis/kata-catalog)
 
-## 💻 Setup
 
-The following programs should be installed on your system:
-- Autoconf (2.59)
-- Automake (1.9.6)
-- Libtool (1.5.22)
-- Check (0.9.9)
+# 💻 Setup
 
-Somewhat earlier versions of these programs might work.
+### Debian (Ubuntu)
+The following programs should be installed on your system using the Aptitute package manager:
+- sudo apt install m4 autoconf automake libtool check
+
+### Mac OSX
+The following programs should be installed on your system using the Homebrew package manager. Run the "brew doctor" command first, and fix any issues recommended by the tool:
+- brew install autoconf automake libtool check pkg-config
+
+
+# 💻 Building
 
 When working at a clean subdirectory, execute the following commands from a terminal to run the autotools with verbose, install, and force flags. This should determine the installed compiler and libraries needed, and generate make files for the project:
 - autoreconf -vif
 - ./configure
 
-## 💻 Testing
+
+# 💻 Testing
 
 To compile and run the unit-tests, run the following command from a terminal:
 - make check
 
-## 🏸 Background
+
+# 🏸 Background
 
 In a game of tennis, a player begins with a score of love (0). With each success, the player earns more points. The points are earned in this sequence:
 
