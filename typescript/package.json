@@ -9,6 +9,7 @@
   "author": "Kyle Adams <kadams54@users.noreply.github.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^27.4.1",
     "jest": "^27.5.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
