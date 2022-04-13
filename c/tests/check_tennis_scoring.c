@@ -34,6 +34,16 @@ START_TEST(test_game_initial_state)
 }
 END_TEST
 
+START_TEST(test_next_score)
+{
+    ck_assert_uint_eq(next_score(Love), Fifteen);
+    ck_assert_uint_eq(next_score(Fifteen), Thirty);
+    ck_assert_uint_eq(next_score(Thirty), Fourty);
+    ck_assert_uint_eq(next_score(Fourty), WinningScore);
+    ck_assert_uint_eq(next_score(WinningScore), WinningScore);
+}
+END_TEST
+
 Suite * tennis_scoring_suite(void)
 {
     Suite *s;
@@ -53,6 +63,7 @@ Suite * tennis_scoring_suite(void)
     tc_tennis = tcase_create("Tennis");
 
     tcase_add_test(tc_tennis, test_game_initial_state);
+    tcase_add_test(tc_tennis, test_next_score);
     suite_add_tcase(s, tc_tennis);
 
     return s;
@@ -67,7 +78,7 @@ int main(void)
     s = tennis_scoring_suite();
     sr = srunner_create(s);
 
-    srunner_run_all(sr, CK_NORMAL);
+    srunner_run_all(sr, CK_VERBOSE);
     number_failed = srunner_ntests_failed(sr);
     srunner_free(sr);
     return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
