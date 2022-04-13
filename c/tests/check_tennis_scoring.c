@@ -26,8 +26,8 @@ START_TEST(test_game_initial_state)
     ck_assert_ptr_ne(NULL, &PlayerRed);
 
     /* They both have a score of 0 (love) */
-    ck_assert_uint_eq(0, PlayerBlue.score);
-    ck_assert_uint_eq(0, PlayerRed.score);
+    ck_assert_uint_eq(Love, PlayerBlue.score);
+    ck_assert_uint_eq(Love, PlayerRed.score);
 
     /* There is no winner */
     ck_assert_ptr_eq(NULL, Winner);

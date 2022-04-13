@@ -2,9 +2,9 @@
 #include "tennis_scoring.h"
 
 Player_Struct PlayerBlue = {
-    0
+    Love
 };
 Player_Struct PlayerRed = {
-    0
+    Love
 };
 Player_Struct *Winner = NULL;
