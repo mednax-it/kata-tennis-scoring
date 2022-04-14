@@ -36,12 +36,9 @@ END_TEST
 
 START_TEST(test_next_score)
 {
-    Score_Structure score = {
-        Love, 0
-    };
-    Player_Struct player = {
-        &score
-    };
+    Score_Structure score = { Love, 0 };
+    Player_Struct player = { &score };
+
     next_score(&player.score);
     ck_assert_int_eq(player.score->score, Fifteen);
 
@@ -56,6 +53,43 @@ START_TEST(test_next_score)
 
     next_score(&player.score);
     ck_assert_int_eq(player.score->score, WinningScore);
+}
+END_TEST
+
+START_TEST(test_get_score)
+{
+    Score_Structure score_a = { Love, 0 };
+    Score_Structure score_b = { Love, 0 };
+    Player_Struct player_a = { &score_a };
+    Player_Struct player_b = { &score_b };
+    char score_string[80] = "zero";
+
+    get_score(&player_a, &player_b, (char*)&score_string);
+    ck_assert_str_eq(score_string, "love-all");
+
+    next_score(&player_a.score);
+    get_score(&player_a, &player_b, (char*)&score_string);
+    ck_assert_str_eq(score_string, "15-love");
+
+    next_score(&player_b.score);
+    get_score(&player_a, &player_b, (char*)&score_string);
+    ck_assert_str_eq(score_string, "15-all");
+
+    next_score(&player_b.score);
+    get_score(&player_a, &player_b, (char*)&score_string);
+    ck_assert_str_eq(score_string, "15-30");
+
+    next_score(&player_a.score);
+    get_score(&player_a, &player_b, (char*)&score_string);
+    ck_assert_str_eq(score_string, "30-all");
+
+    next_score(&player_a.score);
+    get_score(&player_a, &player_b, (char*)&score_string);
+    ck_assert_str_eq(score_string, "40-30");
+
+    next_score(&player_b.score);
+    get_score(&player_a, &player_b, (char*)&score_string);
+    ck_assert_str_eq(score_string, "40-all");
 }
 END_TEST
 
@@ -79,6 +113,7 @@ Suite * tennis_scoring_suite(void)
 
     tcase_add_test(tc_tennis, test_game_initial_state);
     tcase_add_test(tc_tennis, test_next_score);
+    tcase_add_test(tc_tennis, test_get_score);
     suite_add_tcase(s, tc_tennis);
 
     return s;

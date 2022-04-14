@@ -20,5 +20,6 @@ extern Player_Struct PlayerBlue;
 extern Player_Struct PlayerRed;
 extern Player_Struct *Winner;
 extern void next_score(Score_Structure **score);
+extern void get_score(Player_Struct *score_a, Player_Struct *score_b, char *score_string);
 
 #endif /* TENNIS_SCORING_H */
