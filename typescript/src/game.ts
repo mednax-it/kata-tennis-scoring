@@ -16,6 +16,14 @@ export type GameState = {
   winner: Player | null;
 };
 
+const scores = [
+  Score.LOVE,
+  Score.FIFTEEN,
+  Score.THIRTY,
+  Score.FOURTY,
+  Score.WINNER,
+];
+
 export function start(): GameState {
   return {
     scores: {
@@ -23,5 +31,21 @@ export function start(): GameState {
       [Player.TWO]: Score.LOVE,
     },
     winner: null,
+  };
+}
+
+export function nextScore(currentScore: Score): Score {
+  return scores[scores.indexOf(currentScore) + 1];
+}
+
+export function awardPoint(game: GameState, player: Player): GameState {
+  const newScore = nextScore(game.scores[player]);
+  const newScores = {
+    ...game.scores,
+    ...{ [player]: newScore },
+  };
+  return {
+    ...game,
+    ...{ scores: newScores, winner: newScore === Score.WINNER ? player : null },
   };
 }
