@@ -1,33 +1,35 @@
 #include <stdlib.h>
 #include "tennis_scoring.h"
 
+Score_Structure SCORES[] = {
+    {
+        Love, 0
+    },
+    {
+        Fifteen, 15
+    },
+    {
+        Thirty, 30
+    },
+    {
+        Fourty, 40
+    },
+    {
+        WinningScore, -1
+    }
+};
 Player_Struct PlayerBlue = {
-    Love
+    &SCORES[Love]
 };
 Player_Struct PlayerRed = {
-    Love
+    &SCORES[Love]
 };
 Player_Struct *Winner = NULL;
-static const Score_Enum ScoreMap[] = {
-    Love,
-    Fifteen,
-    Thirty,
-    Fourty,
-    WinningScore
-};
 
-Score_Enum next_score(Score_Enum score) {
-    Score_Enum new_score = score;
-
-    if (score != WinningScore)
+void next_score(Score_Structure **current_score) {
+    if ((*current_score)->score != WinningScore)
     {
-        for (int i = 0; i < sizeof(ScoreMap) / sizeof(Score_Enum); i++)
-        {
-            if (score == ScoreMap[i]){
-                new_score = ScoreMap[i + 1];
-            }
-        }
+        *current_score = &SCORES[(*current_score)->score + 1];
     }
-    return new_score;
 }
 

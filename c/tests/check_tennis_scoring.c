@@ -26,8 +26,8 @@ START_TEST(test_game_initial_state)
     ck_assert_ptr_ne(NULL, &PlayerRed);
 
     /* They both have a score of 0 (love) */
-    ck_assert_uint_eq(Love, PlayerBlue.score);
-    ck_assert_uint_eq(Love, PlayerRed.score);
+    ck_assert_uint_eq(Love, PlayerBlue.score->score);
+    ck_assert_uint_eq(Love, PlayerRed.score->score);
 
     /* There is no winner */
     ck_assert_ptr_eq(NULL, Winner);
@@ -36,11 +36,26 @@ END_TEST
 
 START_TEST(test_next_score)
 {
-    ck_assert_uint_eq(next_score(Love), Fifteen);
-    ck_assert_uint_eq(next_score(Fifteen), Thirty);
-    ck_assert_uint_eq(next_score(Thirty), Fourty);
-    ck_assert_uint_eq(next_score(Fourty), WinningScore);
-    ck_assert_uint_eq(next_score(WinningScore), WinningScore);
+    Score_Structure score = {
+        Love, 0
+    };
+    Player_Struct player = {
+        &score
+    };
+    next_score(&player.score);
+    ck_assert_int_eq(player.score->score, Fifteen);
+
+    next_score(&player.score);
+    ck_assert_int_eq(player.score->score, Thirty);
+
+    next_score(&player.score);
+    ck_assert_int_eq(player.score->score, Fourty);
+
+    next_score(&player.score);
+    ck_assert_int_eq(player.score->score, WinningScore);
+
+    next_score(&player.score);
+    ck_assert_int_eq(player.score->score, WinningScore);
 }
 END_TEST
 
