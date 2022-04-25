@@ -40,12 +40,13 @@ export function nextScore(currentScore: Score): Score {
 
 export function awardPoint(game: GameState, player: Player): GameState {
   const newScore = nextScore(game.scores[player]);
-  const newScores = {
+  const scores = {
     ...game.scores,
     ...{ [player]: newScore },
   };
+  const winner = newScore === Score.WINNER ? player : null;
   return {
     ...game,
-    ...{ scores: newScores, winner: newScore === Score.WINNER ? player : null },
+    ...{ scores, winner },
   };
 }
