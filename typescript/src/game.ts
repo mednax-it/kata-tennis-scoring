@@ -12,7 +12,7 @@ export enum Score {
 }
 
 export type GameState = {
-  scores: Record<string, number>;
+  scores: Record<string, number | null>;
   winner: Player | null;
 };
 
@@ -34,7 +34,10 @@ export function start(): GameState {
   };
 }
 
-export function nextScore(currentScore: Score): Score {
+export function nextScore(currentScore: Score | null): Score | null {
+  if (!currentScore || currentScore === Score.WINNER) {
+    return null;
+  }
   return scores[scores.indexOf(currentScore) + 1];
 }
 
