@@ -20,7 +20,7 @@ class GameState(TypedDict):
     winner: Player | None
 
 
-def start():
+def start() -> GameState:
     return {
         "scores": {
             Player.ONE: Score.LOVE,
@@ -30,14 +30,14 @@ def start():
     }
 
 
-def next_score(current_score):
-    if current_score == Score.WINNER:
+def next_score(current_score: Score | None) -> Score | None:
+    if not current_score or current_score == Score.WINNER:
         return None
     scores = list(Score)
     return scores[scores.index(current_score) + 1]
 
 
-def award_point(game, player):
+def award_point(game: GameState, player: Player) -> GameState:
     new_score = next_score(game["scores"][player])
     scores = {
         **game["scores"],
