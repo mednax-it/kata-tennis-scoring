@@ -36,6 +36,6 @@ def award_point(game, player):
     }
     winner = player if new_score == Score.WINNER else None
     return {
-        **game,
-        **{ 'scores': new_scores, 'winner': winner }
+        'scores': scores,
+        'winner': winner
     }
