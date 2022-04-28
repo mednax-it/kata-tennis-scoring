@@ -12,7 +12,7 @@ export enum Score {
 }
 
 export type GameState = {
-  scores: Record<string, number | null>;
+  scores: Record<Player, Score | null>;
   winner: Player | null;
 };
 
