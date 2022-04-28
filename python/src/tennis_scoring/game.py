@@ -2,8 +2,8 @@ from enum import Enum
 
 
 class Player(Enum):
-    ONE = 1
-    TWO = 2
+    ONE = "player 1"
+    TWO = "player 2"
 
 
 class Score(Enum):
@@ -33,7 +33,7 @@ def next_score(current_score):
 
 def award_point(game, player):
     new_score = next_score(game["scores"][player])
-    new_scores = {
+    scores = {
         **game["scores"],
         **{player: new_score},
     }

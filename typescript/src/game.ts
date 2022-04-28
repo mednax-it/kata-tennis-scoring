@@ -48,8 +48,5 @@ export function awardPoint(game: GameState, player: Player): GameState {
     ...{ [player]: newScore },
   };
   const winner = newScore === Score.WINNER ? player : null;
-  return {
-    scores,
-    winner,
-  };
+  return { scores, winner };
 }
