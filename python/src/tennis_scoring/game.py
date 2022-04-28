@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import TypedDict
 
 
 class Player(Enum):
@@ -12,6 +13,11 @@ class Score(Enum):
     THIRTY = 30
     FOURTY = 40
     WINNER = 100
+
+
+class GameState(TypedDict):
+    scores: dict[Player, Score | None]
+    winner: Player | None
 
 
 def start():
